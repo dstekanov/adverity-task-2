@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.8.1'
+}
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'com.codeborne', name: 'selenide', version: '5.24.4'
+
+    testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.3.3.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-test:2.3.3.RELEASE'
+
+    implementation group: 'org.assertj', name: 'assertj-core', version: '3.19.0'
+
+    implementation group: 'io.qameta.allure', name: 'allure-testng', version: '2.13.5'
+    implementation group: 'io.qameta.allure', name: 'allure-assertj', version: '2.13.5'
+    implementation group: 'io.qameta.allure', name: 'allure-selenide', version: '2.13.5'
+
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
+}
+
+test {
+    useTestNG()
+}
+
+ext {
+    allureVersion = '2.13.5'
+}
+
+allure {
+    version = allureVersion
+
+    autoconfigure = true
+    aspectjweaver = true
+    aspectjVersion = "1.9.6"
+
+    useTestNG {
+        version = allureVersion
+    }
+
+    configuration = "testImplementation"
+}
